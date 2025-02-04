@@ -1,0 +1,47 @@
+@import "../../../../../mixins.scss";
+
+form {
+  width: 100%;
+  padding-bottom: 12px;
+  @include flex(start, space-between, row);
+
+  input {
+    flex: 1;
+    padding: 6px 12px;
+    border: 1px solid #e2e5ec;
+    outline: none;
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
+  }
+
+  button {
+    background-color: #769720;
+    color: #ffffff;
+    padding: 6px 12px;
+    border: 1px solid #e2e5ec;
+    outline: none;
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+}
+
+ul {
+  list-style: none;
+  @include flex(start, start, column, 5px);
+
+  li {
+    width: 100%;
+    @include flex(start, space-between, row);
+
+    mat-icon {
+      font-size: 21px;
+      color: #f44336;
+      cursor: pointer;
+    }
+  }
+}

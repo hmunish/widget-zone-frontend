@@ -13,7 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { WidgetService } from '../../../core/services/widgets/widgets.service';
 import { Widget } from '../../../core/interfaces/widgets/widgets.interface';
 import { FormMode } from '../../../core/interfaces/common.enums';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { PropertiesModalComponent } from './properties-modal/propertiesModal.component';
 
 @Component({
   selector: 'app-newsletter',
@@ -34,7 +35,8 @@ export class NewsletterComponent implements OnInit {
     private fb: FormBuilder,
     private service: NewsletterService,
     private notifyService: NotificationService,
-    private widgetService: WidgetService
+    private widgetService: WidgetService,
+    private dialog: MatDialog
   ) {
     this.widgetFormGroup = this.fb.group({
       title: [null, [Validators.required, Validators.maxLength(100)]],
@@ -118,6 +120,17 @@ export class NewsletterComponent implements OnInit {
     this.widgetService.delete(id).subscribe((res) => {
       this.notifyService.openSnackBar('Widget have been successfully deleted.');
       this.listUserWidget();
+    });
+  }
+
+  handleManageProperties(widgetId: string, properties: string[]) {
+    const dialogRef = this.dialog.open(PropertiesModalComponent, {
+      width: '350px',
+      data: {
+        widgetId,
+        properties,
+        refreshWidgetList: () => this.listUserWidget(),
+      },
     });
   }
 }

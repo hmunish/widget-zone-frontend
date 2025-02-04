@@ -16,6 +16,7 @@ export interface Newsletter {
         bgColor: string;
       };
     };
+    properties: string[];
   };
 }
 
@@ -37,4 +38,9 @@ export interface NewsletterPayload {
 
 export interface NewsletterListResponse extends APIResponse {
   data: Newsletter[];
+}
+
+export interface NewsletterPropertyModalData {
+  widgetId: string;
+  properties: string[];
 }

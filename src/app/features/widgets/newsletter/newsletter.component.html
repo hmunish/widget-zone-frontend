@@ -30,7 +30,15 @@
             <mat-icon (click)="handleDeleteWidget(newsletter._id)"
               >delete</mat-icon
             >
-            <mat-icon>website</mat-icon>
+            <mat-icon
+              (click)="
+                handleManageProperties(
+                  newsletter._id,
+                  newsletter.widget.properties
+                )
+              "
+              >website</mat-icon
+            >
           </td>
         </tr>
       </tbody>

@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Manage Properties</h1>
+<div mat-dialog-content id="content">
+  <form [formGroup]="propertyForm" (ngSubmit)="handlePropertyFormSubmit()">
+    <input
+      type="text"
+      formControlName="property"
+      placeholder="Add new property"
+    />
+    <button type="submit" [disabled]="propertyForm.invalid">Add</button>
+  </form>
+  <ul>
+    <li *ngFor="let p of data.properties; let i = index">
+      {{ p }}
+      <mat-icon color="red" (click)="handlePropertyDelete(p, +i)"
+        >close</mat-icon
+      >
+    </li>
+  </ul>
+</div>
+<div align="end" mat-dialog-actions id="actions">
+  <button mat-button (click)="close()" id="close">Close</button>
+</div>
