@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { NewsletterPropertiesModalService } from '../../../../core/services/widgets/newsletterPropertiesModal.service';
+import { UserWidgetPropertiesModalService } from '../../../core/services/widgets/userWidgetPropertiesModal.service';
 
 @Component({
   selector: 'app-propertiesModal',
@@ -24,7 +24,7 @@ export class PropertiesModalComponent {
     public dialogRef: MatDialogRef<PropertiesModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PropertiesModalData,
     private fb: FormBuilder,
-    private service: NewsletterPropertiesModalService
+    private service: UserWidgetPropertiesModalService
   ) {
     this.propertyForm = this.fb.group({
       property: [

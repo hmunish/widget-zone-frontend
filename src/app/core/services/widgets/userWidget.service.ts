@@ -7,25 +7,29 @@ import {
   NewsletterPayload,
 } from '../../interfaces/widgets/newsletter.interface';
 import { CommonService } from '../common.service';
-import { WidgetDetailResponse } from '../../interfaces/widgets/widgets.interface';
+import {
+  AdvertisementListResponse,
+  AdvertisementPayload,
+} from '../../interfaces/widgets/advertisement.interface';
+import { CreateUserWidgetResponse } from '../../interfaces/widgets/user-widget.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class NewsletterService {
+export class UserWidgetService {
   constructor(private http: HttpClient, private commonService: CommonService) {}
 
-  list() {
-    return this.http.get<NewsletterListResponse>(
-      environment.baseAPIUrl + '/users/widgets',
+  list(type: string) {
+    return this.http.get<NewsletterListResponse | AdvertisementListResponse>(
+      environment.baseAPIUrl + '/users/widgets/' + type,
       {
         headers: this.commonService.getRequestHeaders(),
       }
     );
   }
 
-  create(payload: NewsletterPayload) {
-    return this.http.post<APIResponse>(
+  create(payload: NewsletterPayload | AdvertisementPayload) {
+    return this.http.post<CreateUserWidgetResponse>(
       environment.baseAPIUrl + '/users/widgets',
       payload,
       {
@@ -34,9 +38,19 @@ export class NewsletterService {
     );
   }
 
-  edit(id: string, payload: NewsletterPayload) {
+  edit(id: string, payload: NewsletterPayload | AdvertisementPayload) {
     return this.http.put<APIResponse>(
       environment.baseAPIUrl + '/users/widgets/' + id,
+      payload,
+      {
+        headers: this.commonService.getRequestHeaders(),
+      }
+    );
+  }
+
+  uploadImage(id: string, payload: FormData) {
+    return this.http.post<APIResponse>(
+      environment.baseAPIUrl + '/users/widgets/' + id + '/images',
       payload,
       {
         headers: this.commonService.getRequestHeaders(),

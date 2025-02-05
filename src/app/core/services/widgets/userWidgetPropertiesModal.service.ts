@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonService } from '../common.service';
-import { WidgetDetailResponse } from '../../interfaces/widgets/widgets.interface';
 import { environment } from '../../../../environments/environment';
-import { APIResponse } from '../../interfaces/common.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class NewsletterPropertiesModalService {
+export class UserWidgetPropertiesModalService {
   constructor(private http: HttpClient, private commonService: CommonService) {}
 
   add(widgetId: string, property: string) {

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NewsletterService } from '../../../core/services/widgets/newsletter.service';
+import { UserWidgetService } from '../../../core/services/widgets/userWidget.service';
 import {
   FormBuilder,
   FormGroup,
@@ -7,14 +7,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { NotificationService } from '../../../core/services/notification.service';
-import { Newsletter } from '../../../core/interfaces/widgets/newsletter.interface';
+import {
+  Newsletter,
+  NewsletterListResponse,
+} from '../../../core/interfaces/widgets/newsletter.interface';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { WidgetService } from '../../../core/services/widgets/widgets.service';
 import { Widget } from '../../../core/interfaces/widgets/widgets.interface';
 import { FormMode } from '../../../core/interfaces/common.enums';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { PropertiesModalComponent } from './properties-modal/propertiesModal.component';
+import { PropertiesModalComponent } from '../properties-modal/propertiesModal.component';
 
 @Component({
   selector: 'app-newsletter',
@@ -25,19 +28,28 @@ import { PropertiesModalComponent } from './properties-modal/propertiesModal.com
 })
 export class NewsletterComponent implements OnInit {
   widgetDetail: Widget | undefined;
-  widgetFormGroup: FormGroup;
-  userNewsletterList: Newsletter[] = [];
+  widgetFormGroup!: FormGroup;
+  userWidgetList: Newsletter[] = [];
   widgetFormMode = FormMode.Add;
 
   @ViewChild('widgetFormElement') widgetFormElement!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
-    private service: NewsletterService,
+    private service: UserWidgetService,
     private notifyService: NotificationService,
     private widgetService: WidgetService,
     private dialog: MatDialog
   ) {
+    this.initWidgetForm();
+  }
+
+  ngOnInit(): void {
+    this.getWidgetDetail();
+    this.listUserWidget();
+  }
+
+  initWidgetForm() {
     this.widgetFormGroup = this.fb.group({
       title: [null, [Validators.required, Validators.maxLength(100)]],
       color: ['#000000', [Validators.required]],
@@ -47,11 +59,6 @@ export class NewsletterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getWidgetDetail();
-    this.listUserWidget();
-  }
-
   getWidgetDetail() {
     this.widgetService.detail('newsletter').subscribe((res) => {
       this.widgetDetail = res.data;
@@ -59,8 +66,8 @@ export class NewsletterComponent implements OnInit {
   }
 
   listUserWidget() {
-    this.service.list().subscribe((res) => {
-      this.userNewsletterList = res.data;
+    this.service.list('newsletter').subscribe((res) => {
+      this.userWidgetList = (res as NewsletterListResponse).data;
     });
   }
 
@@ -81,7 +88,7 @@ export class NewsletterComponent implements OnInit {
     };
     if (this.widgetFormMode === FormMode.Add) {
       this.service.create(payload).subscribe(() => {
-        this.widgetFormGroup.reset();
+        this.initWidgetForm();
         this.listUserWidget();
         this.notifyService.openSnackBar(
           'Widget have been successfully created.'
@@ -113,7 +120,7 @@ export class NewsletterComponent implements OnInit {
 
   handleCancelEditWidget() {
     this.widgetFormMode = FormMode.Add;
-    this.widgetFormGroup.reset();
+    this.initWidgetForm();
   }
 
   handleDeleteWidget(id: string) {
