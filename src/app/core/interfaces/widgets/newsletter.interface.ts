@@ -17,6 +17,10 @@ export interface Newsletter {
       };
     };
     properties: string[];
+    subscribers: {
+      emailId: string;
+      property: string;
+    };
   };
 }
 
@@ -33,6 +37,11 @@ export interface NewsletterPayload {
       color: string;
       bgColor: string;
     };
+  };
+  properties?: string[];
+  subscribers?: {
+    emailId: string;
+    property: string;
   };
 }
 

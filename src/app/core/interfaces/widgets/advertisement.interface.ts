@@ -13,6 +13,7 @@ export interface AdvertisementPayload {
       bgColor: string;
     };
   };
+  properties?: string[];
 }
 
 export interface Advertisement {

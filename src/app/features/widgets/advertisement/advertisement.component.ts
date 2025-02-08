@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { WidgetService } from '../../../core/services/widgets/widgets.service';
 import { Widget } from '../../../core/interfaces/widgets/widgets.interface';
-import { FormMode } from '../../../core/interfaces/common.enums';
+import { FormMode, WidgetType } from '../../../core/interfaces/common.enums';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Advertisement } from '../../../core/interfaces/widgets/advertisement.interface';
 import { PropertiesModalComponent } from '../modals/properties-modal/propertiesModal.component';
@@ -93,13 +93,13 @@ export class AdvertisementComponent implements OnInit {
   }
 
   getWidgetDetail() {
-    this.widgetService.detail('advertisement').subscribe((res) => {
+    this.widgetService.detail(WidgetType.Advertisement).subscribe((res) => {
       this.widgetDetail = res.data;
     });
   }
 
   listUserWidget() {
-    this.service.list('advertisement').subscribe((res) => {
+    this.service.list(WidgetType.Advertisement).subscribe((res) => {
       this.userWidgetList = res.data as Advertisement[];
     });
   }
@@ -215,7 +215,7 @@ export class AdvertisementComponent implements OnInit {
 
   openCodeModal(userWidget: Advertisement) {
     const code = this.widgetDetail?.code.replace(
-      '__WIDGET_ID__',
+      /__WIDGET_ID__/g,
       userWidget._id
     );
 

@@ -10,12 +10,13 @@ import { NotificationService } from '../../../core/services/notification.service
 import {
   Newsletter,
   NewsletterListResponse,
+  NewsletterPayload,
 } from '../../../core/interfaces/widgets/newsletter.interface';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { WidgetService } from '../../../core/services/widgets/widgets.service';
 import { Widget } from '../../../core/interfaces/widgets/widgets.interface';
-import { FormMode } from '../../../core/interfaces/common.enums';
+import { FormMode, WidgetType } from '../../../core/interfaces/common.enums';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PropertiesModalComponent } from '../modals/properties-modal/propertiesModal.component';
 import { UserWidgetCodeModalComponent } from '../modals/code/user-widget-code-modal.component';
@@ -61,13 +62,13 @@ export class NewsletterComponent implements OnInit {
   }
 
   getWidgetDetail() {
-    this.widgetService.detail('newsletter').subscribe((res) => {
+    this.widgetService.detail(WidgetType.Newsletter).subscribe((res) => {
       this.widgetDetail = res.data;
     });
   }
 
   listUserWidget() {
-    this.service.list('newsletter').subscribe((res) => {
+    this.service.list(WidgetType.Newsletter).subscribe((res) => {
       this.userWidgetList = (res as NewsletterListResponse).data;
     });
   }
@@ -88,6 +89,9 @@ export class NewsletterComponent implements OnInit {
         },
         ...(this.widgetFormMode === FormMode.Edit && {
           properties: this.widgetFormGroup.get('properties')?.value,
+        }),
+        ...(this.widgetFormMode === FormMode.Edit && {
+          subscribers: this.widgetFormGroup.get('subscribers')?.value,
         }),
       },
     };
@@ -120,6 +124,7 @@ export class NewsletterComponent implements OnInit {
       message: newsletter.widget.data.message,
       id: newsletter._id,
       properties: newsletter.widget.properties,
+      subscribers: newsletter.widget.subscribers,
     });
     this.widgetFormElement.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
@@ -149,7 +154,7 @@ export class NewsletterComponent implements OnInit {
 
   openCodeModal(userWidget: Newsletter) {
     const code = this.widgetDetail?.code
-      .replace('__WIDGET_ID__', userWidget._id)
+      .replace(/__WIDGET_ID__/g, userWidget._id)
       .replace('__BG_COLOR__', userWidget.widget.data.styles.bgColor)
       .replace('__COLOR__', userWidget.widget.data.styles.color);
 

@@ -12,6 +12,7 @@ import {
   AdvertisementPayload,
 } from '../../interfaces/widgets/advertisement.interface';
 import { CreateUserWidgetResponse } from '../../interfaces/widgets/user-widget.interface';
+import { WidgetType } from '../../interfaces/common.enums';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ import { CreateUserWidgetResponse } from '../../interfaces/widgets/user-widget.i
 export class UserWidgetService {
   constructor(private http: HttpClient, private commonService: CommonService) {}
 
-  list(type: string) {
+  list(type: WidgetType) {
     return this.http.get<NewsletterListResponse | AdvertisementListResponse>(
       environment.baseAPIUrl + '/users/widgets/' + type,
       {

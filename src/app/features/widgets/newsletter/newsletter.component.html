@@ -27,9 +27,6 @@
           </td>
           <td>
             <mat-icon (click)="handleEditWidget(newsletter)">edit</mat-icon>
-            <mat-icon (click)="handleDeleteWidget(newsletter._id)"
-              >delete</mat-icon
-            >
             <mat-icon
               (click)="
                 handleManageProperties(
@@ -40,6 +37,10 @@
               >website</mat-icon
             >
             <mat-icon (click)="openCodeModal(newsletter)">code</mat-icon>
+            <mat-icon>person</mat-icon>
+            <mat-icon (click)="handleDeleteWidget(newsletter._id)"
+              >delete</mat-icon
+            >
           </td>
         </tr>
       </tbody>
