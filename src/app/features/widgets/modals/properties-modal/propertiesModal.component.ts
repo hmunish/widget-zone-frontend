@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UserWidgetPropertiesModalService } from '../../../core/services/widgets/userWidgetPropertiesModal.service';
+import { UserWidgetPropertiesModalService } from '../../../../core/services/widgets/userWidgetPropertiesModal.service';
 
 @Component({
   selector: 'app-propertiesModal',
@@ -31,7 +31,7 @@ export class PropertiesModalComponent {
         '',
         [
           Validators.required,
-          Validators.pattern(/^https?:\/\/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/),
+          Validators.pattern(/^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/),
         ],
       ],
     });
@@ -61,7 +61,6 @@ export class PropertiesModalComponent {
   }
 
   handlePropertyDelete(property: string, index: number) {
-    console.log('//////////////');
     this.service.delete(this.data.widgetId, property).subscribe(() => {
       this.data.properties.splice(index, 1);
       this.data.refreshWidgetList();

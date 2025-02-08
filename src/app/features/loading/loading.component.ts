@@ -7,12 +7,12 @@ import { LoadingService } from '../../core/services/loading.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.scss']
+  styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent {
   loading$: Signal<boolean>;
 
   constructor(private loadingService: LoadingService) {
-    this.loading$ = loadingService.loading$; // ✅ Initialize inside constructor
+    this.loading$ = loadingService.loading$;
   }
 }

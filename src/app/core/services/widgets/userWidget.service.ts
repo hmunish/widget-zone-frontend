@@ -57,4 +57,14 @@ export class UserWidgetService {
       }
     );
   }
+
+  editImage(id: string, payload: FormData) {
+    return this.http.patch<APIResponse>(
+      environment.baseAPIUrl + '/users/widgets/' + id + '/images',
+      payload,
+      {
+        headers: this.commonService.getRequestHeaders(),
+      }
+    );
+  }
 }

@@ -1,0 +1,120 @@
+@import "../../../../mixins.scss";
+
+section {
+  width: 90%;
+  margin: auto;
+}
+
+#header {
+  padding: 16px;
+  background-color: var(--bg-clr-1);
+  border-radius: 0.5rem;
+
+  > div {
+    padding: 16px;
+
+    > div {
+      padding: 8px 24px;
+      background-color: var(--white);
+      border-radius: 0.5rem;
+
+      h1 {
+        margin-bottom: 8px;
+        font-style: italic;
+      }
+
+      p {
+        font-size: 13px;
+        font-style: italic;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+#widget_table_wrapper {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 0.2rem;
+  background-color: #eaeceb;
+
+  > table {
+    width: 100%;
+    font-size: 0.9rem;
+    border-collapse: collapse;
+
+    th {
+      text-align: left;
+      padding: 16px 8px;
+    }
+
+    td {
+      padding: 16px 8px;
+    }
+
+    tbody > tr:nth-child(odd) {
+      background-color: #fff;
+    }
+  }
+}
+
+#new_widget_form {
+  margin: 20px 0;
+  @include flex(start, space-between, row, 15px);
+  flex-wrap: wrap;
+}
+
+.form_field {
+  @include flex(start, start, column, 7px);
+  padding: 16px;
+  width: 31%;
+  background-color: #eaeceb;
+  border-radius: 0.2rem;
+
+  > label {
+    font-weight: 600;
+  }
+
+  > input,
+  textarea {
+    width: 100%;
+    padding: 6px 12px;
+    border: 1px solid #e2e5ec;
+    border-radius: 0.2rem;
+    font-size: 0.825rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #000;
+
+    &:focus {
+      color: #000;
+      background-color: var(--bs-body-bg);
+      border-color: #b2beb0;
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgba(101, 124, 96, 0.25);
+    }
+  }
+}
+
+#create_btn {
+  float: right;
+  background-color: #769720;
+  padding: 8px;
+  border-radius: 0.2rem;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.cancel_btn {
+  margin-right: 8px;
+}
+
+mat-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#form_btn_wrap {
+  align-self: flex-end;
+}

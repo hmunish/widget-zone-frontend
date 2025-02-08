@@ -14,7 +14,8 @@
       <thead>
         <tr>
           <th>S.#</th>
-          <th>Title & Message</th>
+          <th>Title</th>
+          <th>Image</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -23,7 +24,13 @@
           <td>{{ i + 1 }}</td>
           <td>
             {{ newsletter.widget.data.title }}
-            <br />{{ newsletter.widget.data.message }}
+          </td>
+          <td>
+            <img
+              width="75px"
+              :src="{{ newsletter.widget.data.image.url }}"
+              alt=""
+            />
           </td>
           <td>
             <mat-icon (click)="handleEditWidget(newsletter)">edit</mat-icon>
@@ -56,19 +63,21 @@
       <input formControlName="title" type="text" placeholder="Enter title" />
     </div>
     <div class="form_field">
+      <label>Image</label>
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        #fileInput
+        accept=".jpg, .jpeg, .png"
+      />
+    </div>
+    <div class="form_field">
       <label>Color</label>
       <input formControlName="color" type="color" />
     </div>
     <div class="form_field">
       <label>Background Color</label>
       <input formControlName="backgroundColor" type="color" />
-    </div>
-    <div class="form_field">
-      <label>Message</label>
-      <textarea
-        formControlName="message"
-        placeholder="Enter message"
-      ></textarea>
     </div>
     <div id="form_btn_wrap">
       <button

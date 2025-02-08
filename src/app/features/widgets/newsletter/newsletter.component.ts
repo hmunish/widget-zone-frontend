@@ -17,7 +17,8 @@ import { WidgetService } from '../../../core/services/widgets/widgets.service';
 import { Widget } from '../../../core/interfaces/widgets/widgets.interface';
 import { FormMode } from '../../../core/interfaces/common.enums';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { PropertiesModalComponent } from '../properties-modal/propertiesModal.component';
+import { PropertiesModalComponent } from '../modals/properties-modal/propertiesModal.component';
+import { UserWidgetCodeModalComponent } from '../modals/code/user-widget-code-modal.component';
 
 @Component({
   selector: 'app-newsletter',
@@ -72,6 +73,7 @@ export class NewsletterComponent implements OnInit {
   }
 
   handleCreateWidget() {
+    if (this.widgetFormGroup.invalid) return;
     const payload = {
       type: {
         id: this.widgetDetail?._id || '',
@@ -84,6 +86,9 @@ export class NewsletterComponent implements OnInit {
           color: this.widgetFormGroup.get('color')?.value,
           bgColor: this.widgetFormGroup.get('backgroundColor')?.value,
         },
+        ...(this.widgetFormMode === FormMode.Edit && {
+          properties: this.widgetFormGroup.get('properties')?.value,
+        }),
       },
     };
     if (this.widgetFormMode === FormMode.Add) {
@@ -114,6 +119,7 @@ export class NewsletterComponent implements OnInit {
       backgroundColor: newsletter.widget.data.styles.bgColor,
       message: newsletter.widget.data.message,
       id: newsletter._id,
+      properties: newsletter.widget.properties,
     });
     this.widgetFormElement.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
@@ -137,6 +143,20 @@ export class NewsletterComponent implements OnInit {
         widgetId,
         properties,
         refreshWidgetList: () => this.listUserWidget(),
+      },
+    });
+  }
+
+  openCodeModal(userWidget: Newsletter) {
+    const code = this.widgetDetail?.code
+      .replace('__WIDGET_ID__', userWidget._id)
+      .replace('__BG_COLOR__', userWidget.widget.data.styles.bgColor)
+      .replace('__COLOR__', userWidget.widget.data.styles.color);
+
+    this.dialog.open(UserWidgetCodeModalComponent, {
+      width: '500px',
+      data: {
+        code,
       },
     });
   }

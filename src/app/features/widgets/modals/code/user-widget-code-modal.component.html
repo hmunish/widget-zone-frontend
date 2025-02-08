@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Manage Properties</h1>
+<div mat-dialog-content id="content">
+  <code id="code">{{ data.code }}</code>
+</div>
+<div align="end" mat-dialog-actions id="actions">
+  <button mat-button (click)="copyToClipboard()">Copy to Clipboard</button>
+  <button mat-button (click)="close()" id="close">Close</button>
+</div>

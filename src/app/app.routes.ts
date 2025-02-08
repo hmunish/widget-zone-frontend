@@ -4,6 +4,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { AnalyticsComponent } from './features/analytics/analytics.component';
 import { NavbarComponent } from './features/navbar/navbar.component';
 import { NewsletterComponent } from './features/widgets/newsletter/newsletter.component';
+import { AdvertisementComponent } from './features/widgets/advertisement/advertisement.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +24,10 @@ export const routes: Routes = [
   {
     path: 'widgets',
     component: NavbarComponent,
-    children: [{ path: 'newsletter', component: NewsletterComponent }],
+    children: [
+      { path: 'newsletters', component: NewsletterComponent },
+      { path: 'advertisements', component: AdvertisementComponent },
+    ],
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'analytics' },

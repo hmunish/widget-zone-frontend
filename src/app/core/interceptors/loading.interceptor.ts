@@ -5,11 +5,9 @@ import { finalize } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
 
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
-  const loadingService = inject(LoadingService); // ✅ Inject the service
+  const loadingService = inject(LoadingService);
 
-  loadingService.show(); // Show loader when request starts
+  loadingService.show();
 
-  return next(req).pipe(
-    finalize(() => loadingService.hide()) // Hide loader when request completes
-  );
+  return next(req).pipe(finalize(() => loadingService.hide()));
 };
