@@ -1,3 +1,4 @@
+import { WidgetType } from '../common.enums';
 import { APIResponse } from '../common.interface';
 
 export interface Newsletter {
@@ -6,7 +7,7 @@ export interface Newsletter {
   widget: {
     type: {
       id: string;
-      name: string;
+      name: WidgetType;
     };
     data: {
       title: string;
@@ -28,7 +29,7 @@ export interface NewsletterPayload {
   id?: string;
   type: {
     id: string;
-    name: string;
+    name: WidgetType;
   };
   data: {
     title: string;

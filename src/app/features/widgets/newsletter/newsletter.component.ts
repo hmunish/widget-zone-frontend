@@ -26,7 +26,7 @@ import { UserWidgetCodeModalComponent } from '../modals/code/user-widget-code-mo
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, MatIconModule, MatDialogModule],
   templateUrl: './newsletter.component.html',
-  styleUrl: './newsletter.component.scss',
+  styleUrl: '../styles/user-widget.scss',
 })
 export class NewsletterComponent implements OnInit {
   widgetDetail: Widget | undefined;
@@ -58,6 +58,8 @@ export class NewsletterComponent implements OnInit {
       backgroundColor: ['#000000', [Validators.required]],
       message: ['', [Validators.required, Validators.maxLength(500)]],
       id: [''],
+      properties: [null],
+      subscribers: [null],
     });
   }
 
@@ -78,7 +80,7 @@ export class NewsletterComponent implements OnInit {
     const payload = {
       type: {
         id: this.widgetDetail?._id || '',
-        name: 'newsletter',
+        name: WidgetType.Newsletter,
       },
       data: {
         title: this.widgetFormGroup.get('title')?.value,
@@ -87,13 +89,13 @@ export class NewsletterComponent implements OnInit {
           color: this.widgetFormGroup.get('color')?.value,
           bgColor: this.widgetFormGroup.get('backgroundColor')?.value,
         },
-        ...(this.widgetFormMode === FormMode.Edit && {
-          properties: this.widgetFormGroup.get('properties')?.value,
-        }),
-        ...(this.widgetFormMode === FormMode.Edit && {
-          subscribers: this.widgetFormGroup.get('subscribers')?.value,
-        }),
       },
+      ...(this.widgetFormMode === FormMode.Edit && {
+        properties: this.widgetFormGroup.get('properties')?.value,
+      }),
+      ...(this.widgetFormMode === FormMode.Edit && {
+        subscribers: this.widgetFormGroup.get('subscribers')?.value,
+      }),
     };
     if (this.widgetFormMode === FormMode.Add) {
       this.service.create(payload).subscribe(() => {

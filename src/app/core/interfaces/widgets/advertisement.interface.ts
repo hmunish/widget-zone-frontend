@@ -1,10 +1,11 @@
+import { WidgetType } from '../common.enums';
 import { APIResponse } from '../common.interface';
 
 export interface AdvertisementPayload {
   id?: string;
   type: {
     id: string;
-    name: string;
+    name: WidgetType;
   };
   data: {
     title: string;
@@ -22,7 +23,7 @@ export interface Advertisement {
   widget: {
     type: {
       id: string;
-      name: string;
+      name: WidgetType;
     };
     data: {
       title: string;

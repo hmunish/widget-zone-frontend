@@ -22,7 +22,7 @@ import { UserWidgetCodeModalComponent } from '../modals/code/user-widget-code-mo
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, MatIconModule, MatDialogModule],
   templateUrl: './advertisement.component.html',
-  styleUrl: './advertisement.component.scss',
+  styleUrl: '../styles/user-widget.scss',
 })
 export class AdvertisementComponent implements OnInit {
   widgetDetail: Widget | undefined;
@@ -56,6 +56,7 @@ export class AdvertisementComponent implements OnInit {
       color: ['#000000', [Validators.required]],
       backgroundColor: ['#000000', [Validators.required]],
       id: [''],
+      properties: [null],
     });
   }
 
@@ -109,21 +110,21 @@ export class AdvertisementComponent implements OnInit {
     const payload = {
       type: {
         id: this.widgetDetail?._id || '',
-        name: 'advertisement',
+        name: WidgetType.Advertisement,
       },
       data: {
         title: this.widgetFormGroup.get('title')?.value,
         ...(this.widgetFormMode === FormMode.Edit && {
           image: this.widgetFormGroup.get('image')?.value,
         }),
-        ...(this.widgetFormMode === FormMode.Edit && {
-          properties: this.widgetFormGroup.get('properties')?.value,
-        }),
         styles: {
           color: this.widgetFormGroup.get('color')?.value,
           bgColor: this.widgetFormGroup.get('backgroundColor')?.value,
         },
       },
+      ...(this.widgetFormMode === FormMode.Edit && {
+        properties: this.widgetFormGroup.get('properties')?.value,
+      }),
     };
 
     if (this.widgetFormMode === FormMode.Add) {
