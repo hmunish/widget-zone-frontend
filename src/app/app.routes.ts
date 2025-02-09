@@ -5,6 +5,7 @@ import { AnalyticsComponent } from './features/analytics/analytics.component';
 import { NavbarComponent } from './features/navbar/navbar.component';
 import { NewsletterComponent } from './features/widgets/newsletter/newsletter.component';
 import { AdvertisementComponent } from './features/widgets/advertisement/advertisement.component';
+import { TicketManagementComponent } from './features/widgets/ticket-management/ticket-management.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
     children: [
       { path: 'newsletters', component: NewsletterComponent },
       { path: 'advertisements', component: AdvertisementComponent },
+      { path: 'ticket-management', component: TicketManagementComponent },
     ],
     canActivate: [AuthGuard],
   },

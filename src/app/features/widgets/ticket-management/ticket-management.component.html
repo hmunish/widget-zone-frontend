@@ -1,0 +1,94 @@
+<section>
+  <div id="header">
+    <div>
+      <div>
+        <h1>{{ widgetDetail?.name?.toUpperCase() }}</h1>
+        <p>
+          {{ widgetDetail?.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="widget_table_wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>S.#</th>
+          <th>Title & Message</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticketManagement of userWidgetList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            {{ ticketManagement.widget.data.title }}
+            <br />{{ ticketManagement.widget.data.message }}
+          </td>
+          <td>
+            <mat-icon (click)="handleEditWidget(ticketManagement)"
+              >edit</mat-icon
+            >
+            <mat-icon
+              (click)="
+                handleManageProperties(
+                  ticketManagement._id,
+                  ticketManagement.widget.properties
+                )
+              "
+              >website</mat-icon
+            >
+            <mat-icon (click)="openCodeModal(ticketManagement)">code</mat-icon>
+            <mat-icon (click)="handleDeleteWidget(ticketManagement._id)"
+              >delete</mat-icon
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <form
+    id="new_widget_form"
+    [formGroup]="widgetFormGroup"
+    (ngSubmit)="handleCreateWidget()"
+    #widgetFormElement
+  >
+    <div class="form_field">
+      <label>Title</label>
+      <input formControlName="title" type="text" placeholder="Enter title" />
+    </div>
+    <div class="form_field">
+      <label>Color</label>
+      <input formControlName="color" type="color" />
+    </div>
+    <div class="form_field">
+      <label>Background Color</label>
+      <input formControlName="backgroundColor" type="color" />
+    </div>
+    <div class="form_field">
+      <label>Message</label>
+      <textarea
+        formControlName="message"
+        placeholder="Enter message"
+      ></textarea>
+    </div>
+    <div id="form_btn_wrap">
+      <button
+        [disabled]="widgetFormGroup.invalid"
+        id="create_btn"
+        type="submit"
+      >
+        {{ widgetFormMode === "add" ? "Create New" : "Edit Widget" }}
+      </button>
+      <button
+        *ngIf="widgetFormMode === 'edit'"
+        id="create_btn"
+        class="cancel_btn"
+        type="button"
+        (click)="handleCancelEditWidget()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</section>

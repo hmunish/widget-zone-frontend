@@ -13,6 +13,7 @@ import {
 } from '../../interfaces/widgets/advertisement.interface';
 import { CreateUserWidgetResponse } from '../../interfaces/widgets/user-widget.interface';
 import { WidgetType } from '../../interfaces/common.enums';
+import { TicketManagementPayload } from '../../interfaces/widgets/ticket-management.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,9 @@ export class UserWidgetService {
     );
   }
 
-  create(payload: NewsletterPayload | AdvertisementPayload) {
+  create(
+    payload: NewsletterPayload | AdvertisementPayload | TicketManagementPayload
+  ) {
     return this.http.post<CreateUserWidgetResponse>(
       environment.baseAPIUrl + '/users/widgets',
       payload,
@@ -39,7 +42,10 @@ export class UserWidgetService {
     );
   }
 
-  edit(id: string, payload: NewsletterPayload | AdvertisementPayload) {
+  edit(
+    id: string,
+    payload: NewsletterPayload | AdvertisementPayload | TicketManagementPayload
+  ) {
     return this.http.put<APIResponse>(
       environment.baseAPIUrl + '/users/widgets/' + id,
       payload,

@@ -4,6 +4,7 @@ import { CommonService } from '../common.service';
 import { WidgetDetailResponse } from '../../interfaces/widgets/widgets.interface';
 import { environment } from '../../../../environments/environment';
 import { APIResponse } from '../../interfaces/common.interface';
+import { WidgetType } from '../../interfaces/common.enums';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { APIResponse } from '../../interfaces/common.interface';
 export class WidgetService {
   constructor(private http: HttpClient, private commonService: CommonService) {}
 
-  detail(name: string) {
+  detail(name: WidgetType) {
     return this.http.get<WidgetDetailResponse>(
       environment.baseAPIUrl + '/widgets/' + name,
       {
