@@ -6,6 +6,7 @@ import { NavbarComponent } from './features/navbar/navbar.component';
 import { NewsletterComponent } from './features/widgets/newsletter/newsletter.component';
 import { AdvertisementComponent } from './features/widgets/advertisement/advertisement.component';
 import { TicketManagementComponent } from './features/widgets/ticket-management/ticket-management.component';
+import { TicketListComponent } from './features/lists/tickets/ticket-list.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,12 @@ export const routes: Routes = [
       { path: 'advertisements', component: AdvertisementComponent },
       { path: 'ticket-management', component: TicketManagementComponent },
     ],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'tickets',
+    component: NavbarComponent,
+    children: [{ path: '', component: TicketListComponent }],
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'analytics' },

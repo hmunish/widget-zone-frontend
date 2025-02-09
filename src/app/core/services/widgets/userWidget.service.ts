@@ -12,8 +12,9 @@ import {
   AdvertisementPayload,
 } from '../../interfaces/widgets/advertisement.interface';
 import { CreateUserWidgetResponse } from '../../interfaces/widgets/user-widget.interface';
-import { WidgetType } from '../../interfaces/common.enums';
+import { TicketStatus, WidgetType } from '../../interfaces/common.enums';
 import { TicketManagementPayload } from '../../interfaces/widgets/ticket-management.interface';
+import { TicketListResponse } from '../../interfaces/widgets/ticket-list.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +70,30 @@ export class UserWidgetService {
     return this.http.patch<APIResponse>(
       environment.baseAPIUrl + '/users/widgets/' + id + '/images',
       payload,
+      {
+        headers: this.commonService.getRequestHeaders(),
+      }
+    );
+  }
+
+  getTickets(status?: string | null) {
+    return this.http.get<TicketListResponse>(
+      environment.baseAPIUrl +
+        `/users/widgets/tickets${status ? '?status=' + status : ''}`,
+      {
+        headers: this.commonService.getRequestHeaders(),
+      }
+    );
+  }
+
+  updateTicketStatus(widgetId: string, ticketId: string, status: TicketStatus) {
+    return this.http.patch<APIResponse>(
+      environment.baseAPIUrl +
+        '/users/widgets/' +
+        widgetId +
+        '/tickets/' +
+        ticketId,
+      { status },
       {
         headers: this.commonService.getRequestHeaders(),
       }

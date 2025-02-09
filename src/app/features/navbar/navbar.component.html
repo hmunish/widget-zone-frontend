@@ -53,11 +53,23 @@
         <li [routerLink]="'/widgets/ticket-management'">Ticket Management</li>
       </ul>
     </li>
-    <li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
       <p class="dropdown-toggle">
         <mat-icon>add_task</mat-icon>
         Tickets
       </p>
+      <ul class="dropdown-menu">
+        <li [routerLink]="'/tickets'">All Tickets</li>
+        <li [routerLink]="'/tickets'" [queryParams]="{ status: 1 }">
+          Pending Tickets
+        </li>
+        <li [routerLink]="'/tickets'" [queryParams]="{ status: 2 }">
+          Open Tickets
+        </li>
+        <li [routerLink]="'/tickets'" [queryParams]="{ status: 3 }">
+          Closed Tickets
+        </li>
+      </ul>
     </li>
   </ul>
 </section>
