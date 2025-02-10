@@ -6,6 +6,7 @@ export interface Ticket {
   fullName: string;
   emailId: string;
   message: string;
+  property: string;
   status: TicketStatus;
 }
 

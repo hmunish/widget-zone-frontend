@@ -1,0 +1,27 @@
+<div id="widget_table_wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>S.#</th>
+        <th>Email</th>
+        <th>Property</th>
+        <th>Subscribed At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subscriber of subscriberList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          {{ subscriber.subscriber.emailId }}
+        </td>
+        <td>
+          {{ subscriber.subscriber.property }}
+        </td>
+        <td>
+          {{ subscriber.subscriber.subscribedAt | date : "MMM d, y h:mm a" }}
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

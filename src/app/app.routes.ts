@@ -7,6 +7,7 @@ import { NewsletterComponent } from './features/widgets/newsletter/newsletter.co
 import { AdvertisementComponent } from './features/widgets/advertisement/advertisement.component';
 import { TicketManagementComponent } from './features/widgets/ticket-management/ticket-management.component';
 import { TicketListComponent } from './features/lists/tickets/ticket-list.component';
+import { SubscriberListComponent } from './features/lists/subscribers/subscriber-list.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,12 @@ export const routes: Routes = [
     path: 'tickets',
     component: NavbarComponent,
     children: [{ path: '', component: TicketListComponent }],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'subscribers',
+    component: NavbarComponent,
+    children: [{ path: '', component: SubscriberListComponent }],
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'analytics' },

@@ -15,6 +15,7 @@ import { CreateUserWidgetResponse } from '../../interfaces/widgets/user-widget.i
 import { TicketStatus, WidgetType } from '../../interfaces/common.enums';
 import { TicketManagementPayload } from '../../interfaces/widgets/ticket-management.interface';
 import { TicketListResponse } from '../../interfaces/widgets/ticket-list.interface';
+import { SubscriberListResponse } from '../../interfaces/widgets/subscriber-list.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -94,6 +95,15 @@ export class UserWidgetService {
         '/tickets/' +
         ticketId,
       { status },
+      {
+        headers: this.commonService.getRequestHeaders(),
+      }
+    );
+  }
+
+  getSubscribers() {
+    return this.http.get<SubscriberListResponse>(
+      environment.baseAPIUrl + '/users/widgets/subscribers',
       {
         headers: this.commonService.getRequestHeaders(),
       }
