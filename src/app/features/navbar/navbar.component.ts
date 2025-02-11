@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { NavbarService } from '../../core/services/navbar.service';
+import { AuthenticationService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,10 +10,10 @@ import { NavbarService } from '../../core/services/navbar.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit {
-  constructor(private service: NavbarService) {}
+export class NavbarComponent {
+  constructor(private authService: AuthenticationService) {}
 
-  ngOnInit(): void {
-    this.service.fetchWidgets().subscribe((res) => {});
+  handleSignout() {
+    this.authService.logout();
   }
 }
