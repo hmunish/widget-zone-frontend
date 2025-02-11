@@ -19,7 +19,7 @@ export const routes: Routes = [
     component: AuthComponent,
   },
   {
-    path: 'analytics',
+    path: 'reports',
     component: NavbarComponent,
     children: [{ path: '', component: AnalyticsComponent }],
     canActivate: [AuthGuard],
@@ -46,5 +46,5 @@ export const routes: Routes = [
     children: [{ path: '', component: SubscriberListComponent }],
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: 'analytics' },
+  { path: '**', redirectTo: 'reports' },
 ];

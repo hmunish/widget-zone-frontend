@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIResponse } from '../../interfaces/common.interface';
 import { environment } from '../../../../environments/environment';
@@ -77,12 +77,21 @@ export class UserWidgetService {
     );
   }
 
-  getTickets(status?: string | null) {
+  getTickets(status?: string | null, countByMonth?: boolean) {
+    let params = new HttpParams();
+
+    if (countByMonth) {
+      params = params.set('countByMonth', true);
+    }
+
+    if (status) {
+      params = params.set('status', status);
+    }
     return this.http.get<TicketListResponse>(
-      environment.baseAPIUrl +
-        `/users/widgets/tickets${status ? '?status=' + status : ''}`,
+      environment.baseAPIUrl + '/users/widgets/tickets',
       {
         headers: this.commonService.getRequestHeaders(),
+        params,
       }
     );
   }
@@ -101,11 +110,17 @@ export class UserWidgetService {
     );
   }
 
-  getSubscribers() {
+  getSubscribers(countByMonth?: boolean) {
+    let params = new HttpParams();
+
+    if (countByMonth) {
+      params = params.set('countByMonth', true);
+    }
     return this.http.get<SubscriberListResponse>(
       environment.baseAPIUrl + '/users/widgets/subscribers',
       {
         headers: this.commonService.getRequestHeaders(),
+        params,
       }
     );
   }
