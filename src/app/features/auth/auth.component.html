@@ -1,0 +1,198 @@
+<section>
+  <div [class]="mode === authModeEnum.SignUp ? 'signup' : 'signin'">
+    <div id="logo_wrapper">
+      <img src="assets/logo.PNG" alt="Logo" id="logo" />
+      <h1>Widget Zone</h1>
+    </div>
+    <h1>Sign {{ mode === authModeEnum.SignIn ? "In" : "Up" }}</h1>
+    <form [formGroup]="authForm">
+      <div class="form-field multiple" *ngIf="mode === authModeEnum.SignUp">
+        <div class="form-field">
+          <label>First Name</label>
+          <input
+            type="text"
+            matInput
+            placeholder="Enter your first name"
+            formControlName="firstName"
+          />
+          <div
+            *ngIf="
+              authForm.get('firstName')?.invalid &&
+              authForm.get('firstName')?.touched
+            "
+          >
+            <p *ngIf="authForm.get('firstName')?.hasError('required')">
+              First name is required.
+            </p>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Last Name</label>
+          <input
+            type="text"
+            matInput
+            placeholder="Enter your last name"
+            formControlName="lastName"
+          />
+          <div
+            *ngIf="
+              authForm.get('lastName')?.invalid &&
+              authForm.get('lastName')?.touched
+            "
+          >
+            <p *ngIf="authForm.get('lastName')?.hasError('required')">
+              Last name is required.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="form-field multiple" *ngIf="mode === authModeEnum.SignUp">
+        <div class="form-field">
+          <label>Gender</label>
+          <select formControlName="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Date of Birth</label>
+          <input
+            type="date"
+            matInput
+            placeholder="Enter your last name"
+            formControlName="dob"
+            [max]="today"
+          />
+          <div
+            *ngIf="
+              authForm.get('dateOfBirth')?.invalid &&
+              authForm.get('dateOfBirth')?.touched
+            "
+          >
+            <p *ngIf="authForm.get('dateOfBirth')?.hasError('required')">
+              Date of birth is required.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input
+          type="email"
+          matInput
+          placeholder="Enter your email"
+          formControlName="emailId"
+        />
+        <div
+          *ngIf="
+            authForm.get('email')?.invalid && authForm.get('email')?.touched
+          "
+        >
+          <p
+            *ngIf="
+              authForm.get('email')?.hasError('required');
+              else emailInvalid
+            "
+          >
+            Email is required.
+          </p>
+          <ng-template #emailInvalid>
+            <p *ngIf="authForm.get('email')?.hasError('email')">
+              Invalid email format.
+            </p>
+          </ng-template>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input
+          type="password"
+          matInput
+          placeholder="Enter your password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="
+            authForm.get('password')?.invalid &&
+            authForm.get('password')?.touched
+          "
+        >
+          <p
+            *ngIf="
+              authForm.get('password')?.hasError('required');
+              else passwordMinLength
+            "
+          >
+            Password is required.
+          </p>
+          <ng-template #passwordMinLength>
+            <p
+              *ngIf="
+                authForm.get('password')?.hasError('minlength');
+                else passwordPattern
+              "
+            >
+              Password must be at least 8 characters long.
+            </p>
+          </ng-template>
+          <ng-template #passwordPattern>
+            <p *ngIf="authForm.get('password')?.hasError('pattern')">
+              Password must contain at least one letter, one number, and one
+              special character.
+            </p>
+          </ng-template>
+        </div>
+      </div>
+      <div class="form-field" *ngIf="mode === authModeEnum.SignUp">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          matInput
+          placeholder="Re-enter your password"
+          formControlName="confirmPassword"
+        />
+        <div
+          *ngIf="
+            authForm.get('confirmPassword')?.invalid &&
+              authForm.get('confirmPassword')?.touched;
+            else passwordMustMatch
+          "
+        >
+          <p *ngIf="authForm.get('confirmPassword')?.hasError('required')">
+            Confirm password is required.
+          </p>
+        </div>
+        <ng-template #passwordMustMatch>
+          <p
+            *ngIf="
+              authForm.get('confirmPassword')?.value !==
+                authForm.get('password')?.value &&
+              authForm.get('confirmPassword')?.touched
+            "
+          >
+            Passwords must match.
+          </p>
+        </ng-template>
+      </div>
+      <a id="lost_pwd" href="#">Lost password?</a>
+      <div>
+        <button
+          class="btn"
+          [class]="mode === authModeEnum.SignIn ? 'dark' : 'light'"
+          (click)="signIn()"
+          [disabled]="mode === authModeEnum.SignIn && authForm.invalid"
+        >
+          Signin
+        </button>
+        <button
+          class="btn"
+          [class]="mode === authModeEnum.SignUp ? 'dark' : 'light'"
+          (click)="signUp()"
+          [disabled]="mode === authModeEnum.SignUp && authForm.invalid"
+        >
+          Signup
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<div id="widget_table_wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>S.#</th>
+        <th>Request By</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of ticketList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          {{ ticket.ticket.fullName }}
+        </td>
+        <td>
+          {{ ticket.ticket.emailId }}
+        </td>
+        <td>
+          {{ ticket.ticket.message }}
+        </td>
+        <td>
+          <p [ngClass]="['status', getStatusText(ticket.ticket.status)]">
+            {{ getStatusText(ticket.ticket.status) }}
+          </p>
+        </td>
+        <td>
+          <mat-icon
+            class="open"
+            matTooltip="Mark as Open"
+            (click)="handleUpdateStatus(ticket._id, ticket.ticket._id, 2)"
+            >build_circle</mat-icon
+          >
+          <mat-icon
+            class="pending"
+            matTooltip="Mark as Pending"
+            (click)="handleUpdateStatus(ticket._id, ticket.ticket._id, 1)"
+            >schedule</mat-icon
+          >
+          <mat-icon
+            class="closed"
+            matTooltip="Mark as Closed"
+            (click)="handleUpdateStatus(ticket._id, ticket.ticket._id, 3)"
+            >check_circle</mat-icon
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

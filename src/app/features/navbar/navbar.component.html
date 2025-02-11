@@ -1,0 +1,84 @@
+<section id="navbar">
+  <div id="topbar">
+    <div id="logo_wrapper">
+      <img id="logo" src="assets/widget_zone_logo.png" alt="Logo" />
+      <p id="logo_title">Widget Zone</p>
+    </div>
+    <div id="profile-details">
+      <img src="assets/profile-user.png" alt="" />
+      <div>
+        <p id="role">Admin</p>
+        <p id="full-name">Munish Halai</p>
+      </div>
+      <div id="profile-dropdown">
+        <div>
+          <div>
+            <div id="profile">
+              <mat-icon>person</mat-icon>
+            </div>
+            <span>Profile</span>
+          </div>
+          <div>
+            <div id="settings">
+              <mat-icon>settings</mat-icon>
+            </div>
+            <span>Profile</span>
+          </div>
+          <div>
+            <div id="widgets">
+              <mat-icon>widgets</mat-icon>
+            </div>
+            <span>Widgets</span>
+          </div>
+        </div>
+        <button (click)="handleSignout()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+  <ul class="navlinks">
+    <li [routerLink]="['/reports']" routerLinkActive="active">
+      <p>
+        <mat-icon>stacked_line_chart</mat-icon>
+        Reports
+      </p>
+    </li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+      <p class="dropdown-toggle">
+        <mat-icon>margin</mat-icon>
+        Widgets
+      </p>
+      <ul class="dropdown-menu">
+        <li [routerLink]="'/widgets/newsletters'">Newsletter</li>
+        <li [routerLink]="'/widgets/advertisements'">Advertisement</li>
+        <li [routerLink]="'/widgets/ticket-management'">Ticket Management</li>
+      </ul>
+    </li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+      <p class="dropdown-toggle">
+        <mat-icon>add_task</mat-icon>
+        Tickets
+      </p>
+      <ul class="dropdown-menu">
+        <li [routerLink]="'/tickets'">All Tickets</li>
+        <li [routerLink]="'/tickets'" [queryParams]="{ status: 1 }">
+          Pending Tickets
+        </li>
+        <li [routerLink]="'/tickets'" [queryParams]="{ status: 2 }">
+          Open Tickets
+        </li>
+        <li [routerLink]="'/tickets'" [queryParams]="{ status: 3 }">
+          Closed Tickets
+        </li>
+      </ul>
+    </li>
+    <li [routerLink]="['/subscribers']" routerLinkActive="active">
+      <p>
+        <mat-icon>persons</mat-icon>
+        Subscribers
+      </p>
+    </li>
+  </ul>
+</section>
+<section id="article">
+  <router-outlet></router-outlet>
+</section>

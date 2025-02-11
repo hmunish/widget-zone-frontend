@@ -1,0 +1,110 @@
+@import "../../../mixins.scss";
+
+section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 5vh 0;
+  background-image: url(../../../assets/registration-bg.jpeg);
+  background-size: cover;
+  @include flex(start, center);
+
+  > div {
+    padding: 24px;
+    background-color: var(--white);
+    border-radius: 16px;
+    width: 360px;
+    @include flex(unset, center, column, 17px);
+  }
+
+  > div.signup {
+    width: 425px;
+  }
+}
+
+#logo_wrapper {
+  @include flex(center, start, row, 15px);
+
+  h1 {
+    font-weight: 1000;
+  }
+}
+
+#logo {
+  height: 45px;
+}
+
+form {
+  @include flex(unset, center, column, 10px);
+}
+
+.form-field {
+  @include flex(unset, flex-start, column, 5px);
+
+  > label {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  > input,
+  > select {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.2rem;
+    border: 1px solid #e2e5ec;
+    width: 100%;
+  }
+
+  &.multiple {
+    flex-direction: row;
+
+    > div {
+      flex-basis: 50%;
+    }
+  }
+
+  p {
+    font-size: 0.7rem;
+    padding-left: 4px;
+    color: #e63d3d;
+  }
+
+  &:has(p) {
+    > input {
+      border: 1px solid #e63d3d;
+    }
+  }
+}
+
+#lost_pwd {
+  font-size: 0.9rem;
+  color: rgb(101, 124, 96);
+  text-decoration: underline;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.btn {
+  width: 100%;
+  margin: 3px 0;
+  height: 39px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &.dark {
+    background-color: #657c60;
+    color: #ffffff;
+    border: none;
+  }
+
+  &.light {
+    border: 1px solid #769720;
+    color: #769720;
+    background-color: var(--white);
+  }
+
+  &:disabled {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}

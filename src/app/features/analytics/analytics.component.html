@@ -1,0 +1,26 @@
+<section *ngIf="chartSeries && chartOptions">
+  <h1>Subscribers</h1>
+  <apx-chart
+    [series]="chartSeries"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [colors]="chartOptions.colors"
+    [fill]="chartOptions.fill"
+  >
+  </apx-chart>
+</section>
+
+<section *ngIf="chartSeries2 && chartOptions2">
+  <h1>Tickets Generated</h1>
+  <apx-chart
+    [series]="chartSeries2"
+    [chart]="chartOptions2.chart"
+    [xaxis]="chartOptions2.xaxis"
+    [yaxis]="chartOptions2.yaxis"
+    [colors]="chartOptions2.colors"
+    [plotOptions]="chartOptions2.plotOptions"
+    [dataLabels]="chartOptions2.dataLabels"
+    [fill]="chartOptions2.fill"
+  >
+  </apx-chart>
+</section>
