@@ -1,4 +1,4 @@
 export const environment = {
-  baseAPIUrl: 'http://16.171.129.117:3000',
+  baseAPIUrl: 'https://16.171.129.117',
   apiCallingTime: 1000 * 120,
 };
