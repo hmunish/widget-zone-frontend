@@ -9,6 +9,7 @@ import { TicketManagementComponent } from './features/widgets/ticket-management/
 import { TicketListComponent } from './features/lists/tickets/ticket-list.component';
 import { SubscriberListComponent } from './features/lists/subscribers/subscriber-list.component';
 import { UnderDevComponent } from './features/under-dev/under-dev.component';
+import { ProfileComponent } from './features/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -45,6 +46,12 @@ export const routes: Routes = [
     path: 'subscribers',
     component: NavbarComponent,
     children: [{ path: '', component: SubscriberListComponent }],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile',
+    // component: NavbarComponent,
+    children: [{ path: '', component: UnderDevComponent }],
     canActivate: [AuthGuard],
   },
   {
