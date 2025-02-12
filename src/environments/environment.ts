@@ -1,4 +1,4 @@
 export const environment = {
-  baseAPIUrl: 'https://widget-zone-backend-production.up.railway.app:3000',
+  baseAPIUrl: 'http://16.171.129.117:3000',
   apiCallingTime: 1000 * 120,
 };

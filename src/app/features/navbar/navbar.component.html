@@ -12,19 +12,19 @@
       </div>
       <div id="profile-dropdown">
         <div>
-          <div>
+          <div [routerLink]="'/profile'">
             <div id="profile">
               <mat-icon>person</mat-icon>
             </div>
             <span>Profile</span>
           </div>
-          <div>
+          <div [routerLink]="'/settings'">
             <div id="settings">
               <mat-icon>settings</mat-icon>
             </div>
-            <span>Profile</span>
+            <span>Settings</span>
           </div>
-          <div>
+          <div [routerLink]="'/widget-settings'">
             <div id="widgets">
               <mat-icon>widgets</mat-icon>
             </div>
