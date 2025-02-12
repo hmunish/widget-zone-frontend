@@ -30,7 +30,7 @@
   }
 }
 
-body {
+body:not(:has(app-auth)) {
   overflow: hidden;
 }
 
