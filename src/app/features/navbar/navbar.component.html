@@ -7,8 +7,10 @@
     <div id="profile-details">
       <img src="assets/profile-user.png" alt="" />
       <div>
-        <p id="role">Admin</p>
-        <p id="full-name">Munish Halai</p>
+        <p id="role">User</p>
+        <p id="full-name">
+          {{ currentUser?.firstName + " " + currentUser?.lastName }}
+        </p>
       </div>
       <div id="profile-dropdown">
         <div>
