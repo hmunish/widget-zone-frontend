@@ -50,8 +50,8 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    // component: NavbarComponent,
-    children: [{ path: '', component: UnderDevComponent }],
+    component: NavbarComponent,
+    children: [{ path: '', component: ProfileComponent }],
     canActivate: [AuthGuard],
   },
   {
