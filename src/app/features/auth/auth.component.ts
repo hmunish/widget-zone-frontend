@@ -42,6 +42,13 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMode();
+
+    this.route.queryParamMap.subscribe((params) => {
+      const message = params.get('message');
+      if (message) {
+        this.notifyService.openSnackBar(message);
+      }
+    });
   }
 
   initMode() {
@@ -109,6 +116,8 @@ export class AuthComponent implements OnInit {
           this.notifyService.openSnackBar(
             err.status === HttpStatusCode.Unauthorized
               ? 'Invalid credentials'
+              : err.status === HttpStatusCode.Forbidden
+              ? 'Your email is not verified. Please check your inbox for the verification link before logging in.'
               : 'An unexpected error occurred. Please try again later.'
           );
         },
@@ -123,7 +132,7 @@ export class AuthComponent implements OnInit {
       this.authService.signup(this.authForm.value).subscribe({
         next: () => {
           this.notifyService.openSnackBar(
-            'Account created successfully! Redirecting to the sign-in page.'
+            'Account created successfully! A verification link has been sent to your email. Please verify your account before signing in.'
           );
           setTimeout(() => {
             this.router.navigate(['/signin']);
