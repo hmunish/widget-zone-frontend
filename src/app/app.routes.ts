@@ -55,12 +55,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'settings',
+    path: 'widget-settings',
     children: [{ path: '', component: UnderDevComponent }],
     canActivate: [AuthGuard],
   },
   {
-    path: 'widget-settings',
+    path: 'settings',
     children: [{ path: '', component: UnderDevComponent }],
     canActivate: [AuthGuard],
   },
