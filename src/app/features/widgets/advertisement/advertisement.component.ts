@@ -45,8 +45,8 @@ export class AdvertisementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getWidgetDetail();
-    // this.listUserWidget();
+    this.getWidgetDetail();
+    this.listUserWidget();
   }
 
   initWidgetForm() {
