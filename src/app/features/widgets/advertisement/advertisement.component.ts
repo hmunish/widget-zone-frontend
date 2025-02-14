@@ -22,7 +22,7 @@ import { UserWidgetCodeModalComponent } from '../modals/code/user-widget-code-mo
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, MatIconModule, MatDialogModule],
   templateUrl: './advertisement.component.html',
-  styleUrl: '../styles/user-widget.scss',
+  // styleUrl: '../styles/user-widget.scss',
 })
 export class AdvertisementComponent implements OnInit {
   widgetDetail: Widget | undefined;
@@ -47,7 +47,6 @@ export class AdvertisementComponent implements OnInit {
   ngOnInit(): void {
     this.getWidgetDetail();
     this.listUserWidget();
-    console.log('component loaded adv');
   }
 
   initWidgetForm() {
