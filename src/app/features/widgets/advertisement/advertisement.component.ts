@@ -41,12 +41,12 @@ export class AdvertisementComponent implements OnInit {
     private widgetService: WidgetService,
     private dialog: MatDialog
   ) {
-    this.initWidgetForm();
+    // this.initWidgetForm();
   }
 
   ngOnInit(): void {
-    this.getWidgetDetail();
-    this.listUserWidget();
+    // this.getWidgetDetail();
+    // this.listUserWidget();
   }
 
   initWidgetForm() {
