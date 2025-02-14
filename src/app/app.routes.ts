@@ -31,7 +31,7 @@ export const routes: Routes = [
     component: NavbarComponent,
     children: [
       { path: 'newsletters', component: NewsletterComponent },
-      { path: 'advertisements', component: NewsletterComponent },
+      { path: 'advertisements', component: AdvertisementComponent },
       { path: 'ticket-management', component: TicketManagementComponent },
     ],
     canActivate: [AuthGuard],
